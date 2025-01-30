@@ -1,0 +1,131 @@
+<html>
+<head>
+    <style>
+        body{
+            text-align: center;
+        }
+
+        .navBar{
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            gap: 24px;
+        }
+        .Table{
+            width: 100%;
+        }
+
+        .navBar {
+            text-align: center;
+            display: flex;
+            justify-content: center; /* Center the navbar horizontally */
+            align-items: center; /* Center the navbar vertically */
+            width: 100%;
+            gap: 24px;
+        }
+    
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+    
+        td, th {
+            padding: 8px;
+            vertical-align: middle;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+    
+        .Table {
+            width: 100%;
+        }
+
+    </style>
+
+</head>
+<body>
+    
+    <h1> Java script </h1>
+    
+    <div class="navBar">
+        <div id="table-tab" onclick="alterTab1()">
+            <button>Table</button>
+        </div>
+    
+        <div id="add-tab" onclick="alterTab2()">
+            <button>Add Record</button>
+        </div>   
+
+        <div id="edit-tab" onclick="alterTab3()">
+            <button>Edit Record</button>
+        </div>       
+
+
+    </div>
+    <br>
+
+    <div id="Table">       
+        <!-- <a href="table.html">Link</a> -->
+        <h2>Add element to the Server </h2>
+        
+        <h1> Table </h1>
+        
+        <table style="width:100%" id="myTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Grade</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+
+            </tbody>
+        </table>
+
+        <br>
+        <br>
+          
+        <div>
+            ------------------End Table----------------
+        </div>
+    </div>
+    
+
+    <div id="ADD">
+        <input type="text" id="name" placeholder="name">
+        <input type="text" id="age" placeholder="age">
+        <input type="text" id="grade" placeholder="grade">
+        
+        <br><br>
+        <div>
+            <button onclick="addedTOServer()">Submit</button>
+        </div>
+
+    </div>
+
+    <div id="Edit">
+        <input type="number" id="tuple-number" placeholder="tuple-number">
+        <input type="number" id="edit-id" placeholder="id">
+        <input type="text" id="edit-name" placeholder="name">
+        <input type="text" id="edit-age" placeholder="age">
+        <input type="text" id="edit-grade" placeholder="grade">
+        
+
+        <br><br>
+        <div>
+            <button onclick="updateServer()">Submit</button>
+        </div>
+    </div>
+    
+    <script src="script.js">
+ 
+    </script>
+
+</body>
+</html>
