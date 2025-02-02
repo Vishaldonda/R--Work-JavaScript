@@ -1,0 +1,85 @@
+npm init
+This utility will walk you through creating a package.json file.
+It only covers the most common items, and tries to guess sensible defaults.
+
+See `npm help init` for definitive documentation on these fields
+and exactly what they do.
+
+Use `npm install <pkg>` afterwards to install a package and
+save it as a dependency in the package.json file.
+
+Press ^C at any time to quit.
+package name: (mock-api)
+version: (1.0.0)
+description:
+entry point: (index.js)
+test command:
+git repository:
+keywords:
+author:
+license: (ISC)
+About to write to C:\Users\HP\OneDrive\Desktop\Reck Work - JS\Mock API\package.json:
+
+{
+  "name": "mock-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
+
+
+Is this OK? (yes) yes
+
+
+C:\Users\HP\OneDrive\Desktop\Reck Work - JS\Mock API>npm install
+
+up to date, audited 1 package in 773ms
+
+found 0 vulnerabilities
+
+C:\Users\HP\OneDrive\Desktop\Reck Work - JS\Mock API>npm i json-server
+
+added 45 packages, and audited 46 packages in 11s
+
+14 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+C:\Users\HP\OneDrive\Desktop\Reck Work - JS\Mock API>npx json-server db.json
+JSON Server started on PORT :3000
+Press CTRL-C to stop
+Watching db.json...
+
+( ˶ˆ ᗜ ˆ˵ )
+
+Index:
+http://localhost:3000/
+
+Static files:
+Serving ./public directory if it exists
+
+Endpoints:
+http://localhost:3000/student
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

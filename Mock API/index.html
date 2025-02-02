@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body{
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div> Fetch and Post data to  API Call </div>
+    <br>
+    <button onclick="addDataToAPI()">
+        Add data to API (Hard coded)
+    </button>
+    
+    <script>
+
+        var endpoint = "http://localhost:3000/students";
+
+        var responseJson = {}
+        // By default, fetch() makes a GET request
+        async function FetchAPI() {
+            try{
+                const response = await fetch(endpoint);
+                console.log("response : ",response)
+                console.log("status:", response.status)
+                console.log("status:", response["status"])
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                responseJson = await response.json(); // use await if else it a pending promise
+                console.log("responseJson : ",responseJson)
+                }
+            catch(error){
+                console.error("Fetch error:", error);
+            }
+        }
+
+
+        // Post method
+        async function addDataToAPI(){
+            try {
+                const myHeaders = new Headers();
+                myHeaders.append("Content-Type", "application/json");
+                const response = await fetch(endpoint, {
+                    method: "POST",
+                    headers: myHeaders,
+                    body: JSON.stringify({
+                        "name": "p5name",
+                        "address": "p5address",
+                        "phone": "p5phone"
+                    }),
+                });
+        
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+        
+                const responseJson = await response.json();
+                console.log("POST responseJson:", responseJson);
+            } catch (error) {
+                console.error("POST error:", error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            FetchAPI(); // Fetch data on page load
+            // addDataToAPI(); <-- Do NOT call this unless needed explicitly
+        });
+
+    </script>
+</body>
+
+</html>
+
+
+<!-- // addDataToAPI()
+
+        //function callAPIUSingFetch() {
+          //  var response = fetch(endpoint);
+           // console.log("here", response)
+
+            //response.then( data => data.json())
+            //response.then((response) => {
+            //  console.log("returns response:", response); // it is a response
+            //})
+
+            //response.then(data => data.json())
+             //   .then((response) => {
+              //      console.log("returns response array:", response); // it is a array
+               // })
+
+            //console.log('End');
+        //}
+
+        //callAPIUSingFetch()
+
+
+        
+
+        // -----------------------------------------
+         -->

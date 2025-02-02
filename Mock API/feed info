@@ -1,0 +1,33 @@
+function callApi() {
+
+  fetch('https://run.mocky.io/v3/8a8e4e81-ba15-480c-b922-1e618444b334')
+    .then(data => data.json())
+    .then(response => {
+      const gt = response;
+      // debugger;
+      console.log(" Inside function");
+    })
+  console.log(" End");
+}
+
+
+function callApi1() {
+
+  const apiResponse = fetch('https://run.mocky.io/v3/8a8e4e81-ba15-480c-b922-1e618444b334')
+  debugger;
+  apiResponse.then(data => data.json())
+    .then(response => {
+      const gt = response;
+      debugger;
+    })
+}
+
+
+async function callApi2() {
+
+  const res = await fetch('https://run.mocky.io/v3/8a8e4e81-ba15-480c-b922-1e618444b334')
+  debugger
+  const data = await res.json();
+  debugger
+  console.log(data);
+}
