@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div> Test API </div>
+
+    <form>
+        <input type="file" id="fileInput" name="fileInput">
+        <button type="button" id="uploadButton">Upload</button>
+    </form>
+
+    <script>
+        const uploadButton = document.getElementById('uploadButton');
+        const fileInput = document.getElementById('fileInput');
+        const endpoint = 'http://localhost:3000/upload';
+        
+        uploadButton.addEventListener('click', () => {
+            const file = fileInput.files[0];
+            const formData = new FormData();
+            formData.append('file', file);
+            fetch(endpoint, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    alert('File uploaded successfully!');
+                })
+                .catch(error => {
+                    console.error(error);
+                    alert('Error uploading file');
+                });
+        });
+    </script>
+
+</body>
+
+</html>
