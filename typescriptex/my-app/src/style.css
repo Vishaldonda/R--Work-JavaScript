@@ -136,4 +136,18 @@ td, th {
 
 .Table {
   width: 100%;
+  border-radius: 14px;
+}
+
+
+#myTable th:first-child, 
+#myTable td:first-child {
+    visibility: hidden;
+    position: absolute;
+    width: 0;
+    height: 0;
+}
+
+button{
+  border: 1px solid grey;
 }
