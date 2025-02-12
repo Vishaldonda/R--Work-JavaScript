@@ -13,9 +13,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
       <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
     </a>
     <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
+    
     <p class="read-the-docs">
       Click on the Vite and TypeScript logos to learn more
     </p>
@@ -88,7 +86,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 
         <br><br>
         <div>
-            <button onclick="updateServer()">Submit</button>
+            <button id="edit-data">Submit</button>
         </div>
     </div>
       -----------------------------------------------------------------------------------------
@@ -114,6 +112,9 @@ document.getElementById("ADD")!.style.display = "none";
 document.getElementById('add-tab')?.addEventListener('click', () => alterTab2());
 document.getElementById('table-tab')?.addEventListener('click', () => alterTab1());
 document.getElementById('add-data')?.addEventListener('click', () => addedTOServer());
+document.getElementById('edit-data')?.addEventListener('click', () => updateServer()); // submit on edit page
+
+
 
 function alterTab2() {
   console.log("triggered function alterTab2");
@@ -132,27 +133,34 @@ function alterTab2() {
   console.log(tableElement, addElement, editElement); // Check if elements are being found
 
 }
-
 function alterTab1() {
   console.log("triggered function alterTab1");
   const tableElement = document.getElementById("Table") as HTMLElement | null;
   const addElement = document.getElementById("ADD") as HTMLElement | null;
   const editElement = document.getElementById("Edit") as HTMLElement | null;
+  const editTab = document.getElementById("edit-tab") as HTMLElement | null;
+  const addTab = document.getElementById("add-tab") as HTMLElement | null;
 
-  if (tableElement && addElement && editElement) {
+  
+
+  if (tableElement && addElement && editElement && editTab && addTab) {
     addElement.style.display = "none";
     tableElement.style.display = "block";
     editElement.style.display = "none";
+    editTab.style.display = "none";
+    addTab.style.display = "block"
+
   } else {
-    console.error("One or more elements are not found");
+    console.error("Not found");
   }
 
 }
 
+
 async function addedTOServer() {
-  var endpoint = "http://localhost:3000/students/marks";
-  
-  var name = document.getElementById('name')  as HTMLInputElement;
+  var endpoint = "http://localhost:3000/students";
+
+  var name = document.getElementById('name') as HTMLInputElement;
   const nameval = name?.value
 
   const ageElement = document.getElementById('age') as HTMLInputElement;
@@ -162,34 +170,101 @@ async function addedTOServer() {
   const gradeval = gradeElement?.value;
 
   const markElement = document.getElementById('mark') as HTMLInputElement;
-  const markval = markElement? parseInt(markElement.value) : NaN;
-  
+  const markval = markElement ? parseInt(markElement.value) : NaN;
+
 
   const ObjectData = {
     name: nameval,
     age: ageval,
     grade: gradeval,
-    mark : markval
+    mark: markval
   }
 
-  console.log("new reocrd data", ObjectData)
+  console.log("new record data", ObjectData)
 
   //post method
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
+
   const response = await fetch(endpoint, {
     method: "POST",
     body: JSON.stringify(ObjectData),
     headers: myHeaders,
   });
 
-  if (response.ok){
+  if (response.ok) {
     document.getElementById("table-body")!.innerHTML = "";
-  // fetchJsonAPIData()
-  setup(document.querySelector("#chart")!);
+    // fetchJsonAPIData()
+    setup(document.querySelector("#chart")!);
 
-  document.getElementById("ADD")!.style.display = "none";
-  document.getElementById("Table")!.style.display = "block";
+    document.getElementById("ADD")!.style.display = "none";
+    document.getElementById("Table")!.style.display = "block";
 
   }
+}
+
+
+async function updateServer() {
+
+  var idEle = document.getElementById('tuple-number') as HTMLInputElement | null;
+  var nameEle = document.getElementById('edit-name') as HTMLInputElement | null;
+  var ageEle = document.getElementById('edit-age') as HTMLInputElement | null;
+  var gradeEle = document.getElementById('edit-grade') as HTMLInputElement | null;
+
+  const idval: number = idEle ? parseInt(idEle.value) : 0 ;
+  const nameval: string = nameEle ? nameEle.value : ""
+  const ageval: number = ageEle ? parseInt(ageEle.value) : 0;
+  const gradeval: string = gradeEle ? gradeEle.value : ""
+
+  const ObjectData = {
+    id : idval,
+    name: nameval,
+    age: ageval,
+    grade: gradeval
+  }
+
+  console.log("data", ObjectData)
+
+  var endpoint = "http://localhost:3000/students"
+  // update the record
+  var newEndPointURL = endpoint + '/' + idval + ''
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  const response = await fetch(newEndPointURL, {
+    method: "PUT",
+    body: JSON.stringify(ObjectData),
+    headers: myHeaders,
+  });
+
+  if (response.ok) {
+    console.log("posted sucessfully")
+    document.getElementById("table-body")!.innerHTML = "";
+    setup(document.querySelector("#chart")!);
+
+    document.getElementById("ADD")!.style.display = "none";
+    document.getElementById("Table")!.style.display = "block";
+
+    const tableElement = document.getElementById("Table") as HTMLElement | null;
+    const addtab = document.getElementById("add-tab") as HTMLElement | null;
+    // const tabletab = document.getElementById("table-tab") as HTMLElement | null;
+    const edittab = document.getElementById("edit-tab") as HTMLElement | null;
+    const editElement = document.getElementById("Edit") as HTMLElement | null;
+
+    // if (tableElement && addElement && editElement) {
+    addtab!.style.display = "block";
+    // tabletab!.style.display = "none";
+    edittab!.style.display = "none";
+    tableElement!.style.display = "block";
+    editElement!.style.display = "none";
+  }
+  else{
+    console.log("unable to post")
+  }
+
+  // document.getElementById("table-body").innerHTML = "";
+  // fetchJsonAPIData()
+  // document.getElementById("Edit").style.display = "none";
+  // document.getElementById("Table").style.display = "block";
+  // document.getElementById("add-tab").style.display = "block";
+  // document.getElementById("table-tab").style.display = "block";
 }
